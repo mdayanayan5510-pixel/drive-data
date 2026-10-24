@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drive Data | Car Sales & Price Analysis</title>
+<style>
+:root{--bg:#0a1020;--panel:#111b30;--panel2:#17243b;--line:#263652;--text:#edf3ff;--muted:#9eacc5;--blue:#5b8cff;--cyan:#40d8cf;--green:#55d6a0;--orange:#ffbd69}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:12px 16px;font-weight:700}.primary{background:linear-gradient(120deg,var(--blue),#8067f5);color:white}.ghost{background:#1c2b45;color:var(--text);border:1px solid var(--line)}.hidden{display:none!important}.muted{color:var(--muted)}.small{font-size:12px}.auth-wrap{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr}.hero{padding:8vw;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(ellipse at 10% 15%,#1c3970 0,transparent 45%),linear-gradient(145deg,#0c1427,#111e35)}.brand{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:850;letter-spacing:.3px}.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#081326;font-weight:950}.hero h1{font-size:clamp(36px,5vw,66px);line-height:1.04;margin:44px 0 18px;letter-spacing:-2px}.hero h1 span{color:var(--cyan)}.hero p{max-width:510px;line-height:1.7;color:#b6c4dd}.hero-stats{display:flex;gap:26px;flex-wrap:wrap;margin-top:32px}.hero-stats strong{display:block;font-size:24px}.hero-stats span{font-size:12px;color:var(--muted)}.auth-side{display:grid;place-items:center;padding:26px}.auth-card{width:min(100%,430px);padding:32px;background:rgba(17,27,48,.94);border:1px solid var(--line);border-radius:22px;box-shadow:0 24px 80px #0004}.auth-card h2{margin:0 0 8px;font-size:27px}.auth-card>p{margin:0 0 24px;color:var(--muted);font-size:14px}.tabs{display:flex;background:#0b1425;padding:5px;border-radius:11px;margin:20px 0}.tabs button{flex:1;background:transparent;color:var(--muted)}.tabs button.active{background:#233655;color:white}.field{display:block;margin:14px 0}.field span{display:block;font-size:13px;color:#c6d2e8;margin-bottom:7px}.field input,.field select{width:100%;padding:13px 14px;border:1px solid #30415e;border-radius:10px;background:#0a1425;color:var(--text);outline:none}.field input:focus,.field select:focus{border-color:var(--blue)}.full{width:100%;margin-top:10px}.notice{background:#0d2a2b;border:1px solid #205354;color:#9bf1dd;padding:11px 12px;border-radius:10px;font-size:12px;line-height:1.5;margin-top:16px}.app{min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:245px;padding:24px 16px;background:#0d1729;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:5}.sidebar .brand{padding:0 8px 30px}.nav-label{font-size:11px;color:#7285a5;text-transform:uppercase;letter-spacing:1.5px;padding:12px}.nav-btn{display:flex;align-items:center;gap:12px;padding:13px 12px;margin:3px 0;border-radius:10px;background:transparent;color:#aab8d0;text-align:left;width:100%;font-weight:600}.nav-btn.active,.nav-btn:hover{background:#1b2b47;color:white}.nav-btn b{font-size:17px;width:22px;text-align:center}.sidebar-bottom{margin-top:auto}.user-mini{border-top:1px solid var(--line);padding:18px 8px 4px;display:flex;align-items:center;gap:10px}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#284875;font-weight:800}.main{margin-left:245px;padding:30px clamp(18px,3vw,42px);max-width:1600px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.topbar h1{margin:0;font-size:clamp(23px,3vw,32px)}.topbar p{margin:7px 0 0;color:var(--muted);font-size:13px}.top-actions{display:flex;gap:10px;align-items:center}.eyebrow{color:var(--cyan);font-size:11px;text-transform:uppercase;letter-spacing:1.7px;font-weight:800;margin-bottom:8px}.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.panel{background:linear-gradient(145deg,#121e33,#101a2c);border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px}.stat-icon{width:36px;height:36px;border-radius:11px;background:#203456;display:grid;place-items:center;color:var(--cyan);font-size:18px}.stat-value{font-size:clamp(22px,2.4vw,30px);font-weight:850;margin:16px 0 5px;letter-spacing:-.7px}.stat-foot{font-size:12px;color:var(--green)}.two-col{grid-template-columns:1.4fr 1fr;margin-bottom:18px}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:20px}.panel h3{margin:0;font-size:16px}.panel-head p{font-size:12px;color:var(--muted);margin:6px 0 0}.tag{font-size:11px;padding:6px 9px;border-radius:8px;background:#1d304e;color:#b8ccf0}.chart{width:100%;height:220px;display:block}.bars{display:flex;align-items:end;justify-content:space-around;gap:12px;height:180px;padding:10px 5px 0;border-bottom:1px solid var(--line)}.bar-col{height:100%;display:flex;flex:1;flex-direction:column;align-items:center;justify-content:end;gap:8px;min-width:0}.bar{width:min(42px,75%);border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,var(--cyan),#3976da);min-height:8px}.bar-label{font-size:11px;color:var(--muted)}.bar-num{font-size:10px;color:#c8d7f0}.donut-wrap{display:flex;align-items:center;justify-content:center;gap:25px;min-height:180px}.donut{width:140px;height:140px;border-radius:50%;background:conic-gradient(var(--cyan) 0 42%,var(--blue) 42% 72%,#a58bff 72% 89%,var(--orange) 89% 100%);position:relative;flex-shrink:0}.donut:after{content:"2,600\\A records";white-space:pre;position:absolute;inset:24px;border-radius:50%;background:#121e33;display:grid;place-content:center;text-align:center;font-size:14px;font-weight:800;line-height:1.5}.legend{display:grid;gap:12px;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:8px}.dot{width:9px;height:9px;border-radius:3px;display:inline-block}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px;min-width:480px}th,td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line)}th{font-size:11px;color:#91a3c3;text-transform:uppercase;letter-spacing:.8px}td{color:#dbe5f7}.status{color:var(--green);background:#14392f;padding:5px 8px;border-radius:6px;font-size:11px}.page{display:none}.page.active{display:block}.prediction-layout{grid-template-columns:1fr .85fr}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.estimate{background:radial-gradient(ellipse at top right,#20466a,transparent 60%),#101c30;border:1px solid #2d486b;border-radius:16px;padding:25px;height:100%}.estimate h3{margin:0 0 8px}.price{font-size:clamp(32px,4vw,48px);font-weight:900;color:var(--cyan);margin:20px 0 8px;letter-spacing:-1px}.estimate-line{display:flex;justify-content:space-between;gap:10px;padding:13px 0;border-bottom:1px solid #2b3e59;font-size:13px}.pill{display:inline-block;padding:6px 9px;border-radius:7px;background:#173b35;color:#83e9bd;font-size:11px}.empty-note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:16px}.car-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.car-card{overflow:hidden;background:#0c1729;border:1px solid var(--line);border-radius:14px}.car-card img{display:block;width:100%;height:175px;object-fit:cover;background:#17243b}.car-card .car-caption{padding:13px}.car-card strong{display:block;font-size:14px}.car-card span{display:block;color:var(--muted);font-size:12px;margin-top:5px}.preview-image{display:none;max-width:100%;max-height:230px;object-fit:contain;border:1px solid var(--line);border-radius:12px;margin-top:10px;background:#0a1425}.email-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.mobile-menu{display:none}.footer-note{font-size:11px;color:#7285a5;margin-top:24px;line-height:1.6}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.two-col,.prediction-layout{grid-template-columns:1fr}.auth-wrap{grid-template-columns:1fr}.hero{display:none}.auth-side{min-height:100vh}.sidebar{width:76px;padding:18px 10px}.sidebar .brand{padding:0 6px 25px}.brand-name,.nav-btn span,.nav-label,.user-mini .user-info{display:none}.nav-btn{justify-content:center;padding:14px 8px}.nav-btn b{font-size:20px}.user-mini{justify-content:center;padding:18px 0 4px}.main{margin-left:76px}.sidebar .logo{width:42px;height:42px}}
+@media(max-width:700px){.car-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.car-card img{height:135px}}
+@media(max-width:600px){.main{padding:20px 13px;margin-left:0;padding-bottom:90px}.sidebar{inset:auto 0 0;width:100%;height:66px;padding:5px 8px;flex-direction:row;justify-content:space-around;border-right:0;border-top:1px solid var(--line)}.sidebar .brand,.sidebar .nav-label,.sidebar-bottom{display:none}.sidebar nav{display:flex;width:100%;justify-content:space-around}.nav-btn{width:auto;min-width:48px;margin:0;padding:8px;flex-direction:column;gap:2px}.nav-btn span{display:block;font-size:9px}.nav-btn b{font-size:18px}.topbar{align-items:flex-start}.top-actions .ghost{display:none}.stats{gap:10px}.panel{padding:16px}.stat-value{font-size:22px}.form-grid{grid-template-columns:1fr}.donut-wrap{gap:14px}.donut{width:120px;height:120px}.donut:after{inset:20px;font-size:12px}}
+
+/* Data preparation workspace */
+.prep-upload{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px;border:1px dashed #3b5276;border-radius:14px;background:#0b1527}
+.prep-upload input[type=file]{max-width:100%;color:var(--muted)}
+.prep-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}
+.prep-stat{padding:16px;border:1px solid var(--line);border-radius:13px;background:#0c1729}
+.prep-stat strong{display:block;font-size:24px;margin-top:7px}
+.prep-stat span{color:var(--muted);font-size:12px}
+.prep-actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.prep-table{max-height:360px;overflow:auto}
+.prep-table table{min-width:650px}
+@media(max-width:700px){.prep-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.prep-upload{align-items:flex-start;flex-direction:column}}
+
+</style>
+</head>
+<body>
+<section id="authScreen" class="auth-wrap">
+  <div class="hero">
+    <div class="brand"><div class="logo">DD</div><span>DRIVE DATA</span></div>
+    <div class="eyebrow" style="margin-top:55px">Car Sales & Price Analysis</div>
+    <h1>Make your next<br>car decision <span>data-driven.</span></h1>
+    <p>Explore used-car market patterns, compare vehicle details and estimate resale value with your car analytics workspace.</p>
+    <div class="hero-stats"><div><strong>2,600</strong><span>Dataset records*</span></div><div><strong>28</strong><span>Dataset columns*</span></div><div><strong>AI-ready</strong><span>Price analysis workflow</span></div></div>
+    <p class="small" style="margin-top:34px">*Dataset details from the Phase 1 project presentation.</p>
+  </div>
+  <div class="auth-side">
+    <div class="auth-card">
+      <div class="brand"><div class="logo">DD</div><span>DRIVE DATA</span></div>
+      <h2 id="authTitle" style="margin-top:30px">Welcome back</h2>
+      <p id="authSubtitle">Sign in to continue to your dashboard.</p>
+      <div class="tabs"><button id="loginTab" class="active" type="button" onclick="showAuth('login')">Login</button><button id="registerTab" type="button" onclick="showAuth('register')">Create account</button></div>
+      <form id="authForm">
+        <label class="field hidden" id="nameField"><span>Full name</span><input id="fullName" autocomplete="name" placeholder="Enter your name"></label>
+        <label class="field"><span>Email address</span><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label class="field"><span>Password</span><input id="password" type="password" autocomplete="current-password" minlength="6" placeholder="At least 6 characters" required></label>
+        <label class="field hidden" id="confirmField"><span>Confirm password</span><input id="confirmPassword" type="password" minlength="6" placeholder="Re-enter password"></label>
+        <button class="primary full" id="authSubmit" type="submit">Login to dashboard ↗</button>
+      </form>
+      <div id="authMessage" class="notice hidden" role="status"></div>
+      <div class="notice">Demo authentication: this standalone prototype stores demo account details in this browser only. Do not use a real or reused password. A production website needs a secure backend and database.</div>
+    </div>
+  </div>
+</section>
+
+<section id="appScreen" class="app hidden">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">DD</div><span class="brand-name">DRIVE DATA</span></div>
+    <div class="nav-label">Workspace</div>
+    <nav>
+      <button class="nav-btn active" data-page="dashboard" onclick="navigate('dashboard')"><b>▦</b><span>Dashboard</span></button>
+      <button class="nav-btn" data-page="search" onclick="navigate('search')"><b>⌕</b><span>Search cars</span></button>
+      <button class="nav-btn" data-page="gallery" onclick="navigate('gallery')"><b>▧</b><span>Car gallery</span></button>
+      <button class="nav-btn" data-page="predict" onclick="navigate('predict')"><b>⌁</b><span>Price prediction</span></button>
+      <button class="nav-btn" data-page="market" onclick="navigate('market')"><b>▤</b><span>Market insights</span></button>
+      <button class="nav-btn" data-page="prepare" onclick="navigate('prepare')"><b>⚙</b><span>Data preparation</span></button>
+      <button class="nav-btn" data-page="about" onclick="navigate('about')"><b>ⓘ</b><span>Project details</span></button>
+    </nav>
+    <div class="sidebar-bottom"><button class="nav-btn" onclick="logout()"><b>↪</b><span>Logout</span></button><div class="user-mini"><div class="avatar" id="avatar">U</div><div class="user-info"><strong id="sideName">User</strong><div class="small muted">Project account</div></div></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><div class="eyebrow">Car analytics workspace</div><h1 id="pageTitle">Dashboard overview</h1><p id="welcomeLine">Here is your Drive Data project at a glance.</p></div><div class="top-actions"><button class="ghost" onclick="navigate('about')">About project</button><button class="primary" onclick="navigate('predict')">Estimate a car ↗</button></div></header>
+
+    <section class="page active" id="page-dashboard">
+      <div class="grid stats">
+        <div class="panel"><div class="stat-top">Dataset records <span class="stat-icon">▤</span></div><div class="stat-value">2,600</div><div class="stat-foot">Collected for Phase 1*</div></div>
+        <div class="panel"><div class="stat-top">Dataset columns <span class="stat-icon">▦</span></div><div class="stat-value">28</div><div class="stat-foot">Vehicle & listing features*</div></div>
+        <div class="panel"><div class="stat-top">Missing values <span class="stat-icon">✓</span></div><div class="stat-value">0</div><div class="stat-foot">Reported in source dataset*</div></div>
+        <div class="panel"><div class="stat-top">ML models planned <span class="stat-icon">⌘</span></div><div class="stat-value">3</div><div class="stat-foot">Linear, Decision Tree, Random Forest</div></div>
+      </div>
+      <div class="grid two-col">
+        <div class="panel"><div class="panel-head"><div><h3>Illustrative price distribution</h3><p>Sample visualization · not calculated from CSV</p></div><span class="tag">Demo chart</span></div><div class="bars"><div class="bar-col"><span class="bar-num">₹2–4L</span><div class="bar" style="height:48%"></div><span class="bar-label">Budget</span></div><div class="bar-col"><span class="bar-num">₹4–7L</span><div class="bar" style="height:82%"></div><span class="bar-label">Mid-range</span></div><div class="bar-col"><span class="bar-num">₹7–10L</span><div class="bar" style="height:62%"></div><span class="bar-label">Premium</span></div><div class="bar-col"><span class="bar-num">₹10L+</span><div class="bar" style="height:35%"></div><span class="bar-label">Luxury</span></div></div><p class="empty-note">Replace this illustration with results from car_sales.csv during the data analysis phase.</p></div>
+        <div class="panel"><div class="panel-head"><div><h3>Planned analytics</h3><p>Project workflow</p></div><span class="tag">Phase 1</span></div><div class="donut-wrap"><div class="donut"></div><div class="legend"><span><i class="dot" style="background:var(--cyan)"></i>Preprocessing</span><span><i class="dot" style="background:var(--blue)"></i>Exploration</span><span><i class="dot" style="background:#a58bff"></i>Model training</span><span><i class="dot" style="background:var(--orange)"></i>Web integration</span></div></div><p class="empty-note">These segments describe project stages, not measured market proportions.</p></div>
+      </div>
+      <div class="panel"><div class="panel-head"><div><h3>Project roadmap</h3><p>From dataset to a trained valuation model</p></div><span class="tag">4 stages</span></div><div class="table-wrap"><table><thead><tr><th>Stage</th><th>Work</th><th>Status</th></tr></thead><tbody><tr><td>01 · Requirements</td><td>Scope, synopsis and dataset identification</td><td><span class="status">Phase 1</span></td></tr><tr><td>02 · Data preparation</td><td>Clean records, encode categories, create car age</td><td><span class="tag">Next</span></td></tr><tr><td>03 · Analytics & ML</td><td>Explore trends and compare regression models</td><td><span class="tag">Planned</span></td></tr><tr><td>04 · Web integration</td><td>Connect real predictions, charts and reports</td><td><span class="tag">Planned</span></td></tr></tbody></table></div></div>
+      <p class="footer-note">*Figures shown here are taken from your Phase 1 presentation. Charts and estimates on this prototype are illustrative until connected to your actual dataset and trained model.</p>
+    </section>
+
+    <section class="page" id="page-gallery">
+      <div class="panel" style="margin-bottom:18px"><div class="panel-head"><div><h3>Car image gallery</h3><p>Browse sample vehicle categories. Select Price prediction to enter a car's details and estimate a value.</p></div><span class="tag">Image gallery</span></div>
+        <div class="notice" style="margin:0">Images load from Unsplash and require an internet connection. This gallery is illustrative; it does not identify a vehicle from its photo.</div>
+      </div>
+      <div class="car-gallery">
+        <article class="car-card"><img loading="lazy" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80" alt="Modern sports car"><div class="car-caption"><strong>Sports cars</strong><span>Performance and coupe models</span></div></article>
+        <article class="car-card"><img loading="lazy" src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80" alt="SUV vehicle"><div class="car-caption"><strong>SUVs</strong><span>Family and utility vehicles</span></div></article>
+        <article class="car-card"><img loading="lazy" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80" alt="Red sports sedan"><div class="car-caption"><strong>Sedans</strong><span>Comfort and executive cars</span></div></article>
+        <article class="car-card"><img loading="lazy" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80" alt="Luxury sports car"><div class="car-caption"><strong>Luxury cars</strong><span>Premium and high-performance models</span></div></article>
+        <article class="car-card"><img loading="lazy" src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80" alt="Car on the road"><div class="car-caption"><strong>Road cars</strong><span>Everyday used-car listings</span></div></article>
+        <article class="car-card"><img loading="lazy" src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=900&q=80" alt="Electric vehicle charging"><div class="car-caption"><strong>Electric vehicles</strong><span>EVs and new mobility</span></div></article>
+      </div>
+      <div style="margin-top:18px"><button class="primary" onclick="navigate('predict')">Estimate a car price ↗</button></div>
+    </section>
+
+    <section class="page" id="page-search">
+      <div class="panel" style="margin-bottom:18px"><div class="panel-head"><div><h3>Find an individual car price</h3><p>Search the car_sales.csv listings by make, model, year, or fuel type.</p></div><span class="tag">Dataset search</span></div>
+        <div class="notice" style="margin:0 0 18px">Upload your <strong>car_sales.csv</strong> file to search real records and display the price field stored in the dataset. This browser-only page does not automatically fetch live market prices from the internet.</div>
+        <label class="field"><span>Upload dataset (CSV)</span><input id="csvUpload" type="file" accept=".csv,text/csv"></label>
+        <div id="csvStatus" class="muted small" style="margin:8px 0 18px">No CSV loaded yet. Upload car_sales.csv to enable dataset search.</div>
+        <div class="form-grid">
+          <label class="field"><span>Make / brand</span><input id="searchMake" placeholder="e.g. BMW, Toyota, Hyundai"></label>
+          <label class="field"><span>Model</span><input id="searchModel" placeholder="e.g. M5, Camry, Creta"></label>
+          <label class="field"><span>Year</span><input id="searchYear" type="number" min="1900" max="2100" placeholder="Any year"></label>
+          <label class="field"><span>Fuel type</span><select id="searchFuel"><option value="">Any fuel type</option><option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option><option>CNG</option></select></label>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="primary" type="button" onclick="searchCars()">Search cars ↗</button><button class="ghost" type="button" onclick="clearCarSearch()">Clear filters</button></div>
+      </div>
+      <div class="panel"><div class="panel-head"><div><h3>Search results</h3><p id="searchResultCaption">Upload a CSV file, then search for a vehicle.</p></div><span class="tag" id="searchCount">0 results</span></div>
+        <div class="table-wrap"><table><thead><tr id="carResultsHead"><th>Make</th><th>Model</th><th>Year</th><th>Fuel</th><th>Price</th></tr></thead><tbody id="carResultsBody"><tr><td colspan="5" class="muted">No dataset loaded.</td></tr></tbody></table></div>
+        <p class="empty-note">Prices are shown from the uploaded dataset's price column. A dataset listing price is not necessarily the current market value. For a live valuation, connect a trusted listings API or a trained prediction model.</p>
+      </div>
+    </section>
+
+    <section class="page" id="page-predict">
+      <div class="grid prediction-layout">
+        <div class="panel"><div class="panel-head"><div><h3>Vehicle details</h3><p>Enter details to create an illustrative resale estimate.</p></div><span class="tag">Prototype</span></div>
+          <form id="predictionForm">
+            <div class="form-grid">
+              <label class="field"><span>Make / brand</span><select id="make"><option value="Maruti">Maruti Suzuki</option><option value="Hyundai">Hyundai</option><option value="Honda">Honda</option><option value="Toyota">Toyota</option><option value="Tata">Tata</option><option value="BMW">BMW</option><option value="Mercedes">Mercedes-Benz</option><option value="Other">Other</option></select></label>
+              <label class="field"><span>Model name</span><input id="model" placeholder="e.g. City, Creta, 3 Series" required></label>
+              <label class="field"><span>Year of manufacture</span><input id="year" type="number" min="1990" max="2026" value="2020" required></label>
+              <label class="field"><span>Odometer (km)</span><input id="mileage" type="number" min="0" max="1000000" value="45000" required></label>
+              <label class="field"><span>Fuel type</span><select id="fuel"><option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option><option>CNG</option></select></label>
+              <label class="field"><span>Transmission</span><select id="transmission"><option>Manual</option><option>Automatic</option></select></label>
+              <label class="field"><span>Number of previous owners</span><select id="owners"><option value="1">1 owner</option><option value="2">2 owners</option><option value="3">3 owners</option><option value="4">4+ owners</option></select></label>
+              <label class="field"><span>Original price (₹)</span><input id="original" type="number" min="50000" value="800000" required></label>
+              <label class="field"><span>Customer email address</span><input id="customerEmail" type="email" placeholder="customer@example.com" required></label>
+              <label class="field"><span>Upload car photo (optional)</span><input id="carPhotoUpload" type="file" accept="image/*"></label>
+            </div>
+            <img id="carPhotoPreview" class="preview-image" alt="Preview of uploaded car photo">
+            <p class="empty-note">You can upload a car photo for the estimate report. This demo does not use image recognition; price is estimated from the details you enter.</p>
+            <button class="primary full" type="submit">Calculate estimate ↗</button>
+          </form>
+        </div>
+        <div class="estimate"><div class="eyebrow">Your estimated resale value</div><h3 id="estimateCar">Your vehicle</h3><div class="price" id="estimatePrice">₹ —</div><span class="pill">Illustrative estimate only</span><div style="margin-top:22px"><div class="estimate-line"><span class="muted">Vehicle age</span><strong id="estimateAge">—</strong></div><div class="estimate-line"><span class="muted">Mileage entered</span><strong id="estimateMileage">—</strong></div><div class="estimate-line"><span class="muted">Condition adjustment</span><strong>Not included</strong></div></div><p class="empty-note">This is a rule-based demo estimate, not a trained machine-learning prediction or a verified market quote. Use local market data before making a buying or selling decision.</p><div class="email-actions"><button class="primary" id="emailEstimateBtn" type="button" disabled onclick="emailEstimateToCustomer()">Email estimate to customer</button><button class="ghost" type="button" onclick="downloadEstimateReport()">Download estimate report</button></div><p id="emailStatus" class="empty-note">Calculate an estimate first. Email opens your device's email app with a draft; it does not send automatically.</p></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-prepare">
+      <div class="panel">
+        <div class="panel-head"><div><h3>Prepare your car sales dataset</h3><p>Upload a CSV file to clean records, encode categories, and calculate car age.</p></div><span class="tag">Data preparation</span></div>
+        <div class="prep-upload">
+          <label for="prepCsv"><strong>Choose car sales CSV</strong><div class="muted small" style="margin-top:5px">Expected fields can include year, make, model, fuel type, mileage and price.</div></label>
+          <input id="prepCsv" type="file" accept=".csv,text/csv">
+          <button class="primary" type="button" onclick="prepareDataset()">Clean &amp; prepare data</button>
+        </div>
+        <p id="prepStatus" class="empty-note">Choose a CSV file, then select “Clean &amp; prepare data”. Processing happens in this browser; your file is not uploaded to a server.</p>
+      </div>
+      <div class="prep-stats">
+        <div class="prep-stat"><span>Rows after cleaning</span><strong id="prepRows">—</strong></div>
+        <div class="prep-stat"><span>Duplicate rows removed</span><strong id="prepDuplicates">—</strong></div>
+        <div class="prep-stat"><span>Blank rows removed</span><strong id="prepBlank">—</strong></div>
+        <div class="prep-stat"><span>Encoded category columns</span><strong id="prepCategories">—</strong></div>
+      </div>
+      <div class="panel" style="margin-bottom:18px">
+        <div class="panel-head"><div><h3>Preparation summary</h3><p id="prepSummary">Your results will appear here after processing.</p></div></div>
+        <div id="prepMissing" class="muted small">Missing values have not been checked yet.</div>
+        <div class="prep-actions">
+          <button class="ghost" id="downloadCleanBtn" type="button" onclick="downloadPrepared('clean')" disabled>Download cleaned CSV</button>
+          <button class="ghost" id="downloadEncodedBtn" type="button" onclick="downloadPrepared('encoded')" disabled>Download encoded CSV</button>
+        </div>
+        <p class="muted small">Cleaning trims extra spaces, standardizes column names, removes exact duplicate records and completely blank rows. Missing cells are reported, not automatically deleted. Car age is calculated as current year minus model year. Categories are one-hot encoded into 0/1 columns.</p>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><h3>Preview prepared records</h3><p>First 10 rows of the cleaned dataset, including car_age when a year column is found.</p></div></div>
+        <div class="table-wrap prep-table"><table><thead id="prepPreviewHead"><tr><th>Preview</th></tr></thead><tbody id="prepPreviewBody"><tr><td class="muted">Upload a CSV to preview records.</td></tr></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-market">
+      <div class="grid stats"><div class="panel"><div class="stat-top">Data preparation <span class="stat-icon">01</span></div><div class="stat-value">Clean</div><div class="stat-foot">Missing values & duplicates</div></div><div class="panel"><div class="stat-top">Feature engineering <span class="stat-icon">02</span></div><div class="stat-value">Car age</div><div class="stat-foot">Current year − model year</div></div><div class="panel"><div class="stat-top">Model comparison <span class="stat-icon">03</span></div><div class="stat-value">3 models</div><div class="stat-foot">Compare MAE, RMSE and R²</div></div><div class="panel"><div class="stat-top">Visualization <span class="stat-icon">04</span></div><div class="stat-value">EDA</div><div class="stat-foot">Distributions and correlations</div></div></div>
+      <div class="panel"><div class="panel-head"><div><h3>Market insights to explore</h3><p>Questions your dataset analysis should answer</p></div><span class="tag">Analysis plan</span></div><div class="table-wrap"><table><thead><tr><th>Question</th><th>Useful fields</th><th>Suggested analysis</th></tr></thead><tbody><tr><td>How does age affect price?</td><td>year, price</td><td>Scatter plot, correlation</td></tr><tr><td>Does mileage affect resale value?</td><td>odometer, price</td><td>Scatter plot, regression</td></tr><tr><td>Which brands have higher prices?</td><td>make, price</td><td>Median price by brand</td></tr><tr><td>Do fuel types differ in price?</td><td>fuel_type, price</td><td>Grouped box plot / bar chart</td></tr><tr><td>Which model predicts best?</td><td>target price + features</td><td>MAE, RMSE, R² comparison</td></tr></tbody></table></div></div>
+      <p class="footer-note">No actual market conclusions are claimed here because the CSV data and trained model have not been connected to this standalone website.</p>
+    </section>
+
+    <section class="page" id="page-about">
+      <div class="panel"><div class="eyebrow">BCA Major Project · 2026–2027</div><h2 style="margin-top:0">Drive Data — Car Sales & Price Analysis System</h2><p class="muted" style="line-height:1.8">A data-driven resale valuation and market intelligence platform. The planned system combines data preprocessing, exploratory data analysis, machine learning and an interactive web interface for vehicle inputs, analysis and price estimation.</p><div class="grid two-col" style="margin-top:22px"><div><h3>Project objectives</h3><ul class="muted" style="line-height:2"><li>Prepare and clean used-car sales/pricing data.</li><li>Explore trends and feature correlations.</li><li>Compare Linear Regression, Decision Tree and Random Forest.</li><li>Evaluate models using R², MAE and RMSE.</li><li>Present insights in a responsive dashboard.</li></ul></div><div><h3>Technology stack</h3><ul class="muted" style="line-height:2"><li>Python 3.10+</li><li>Pandas and NumPy</li><li>Scikit-learn and Joblib</li><li>Matplotlib / Seaborn</li><li>Streamlit or Flask for production integration</li><li>HTML, CSS and JavaScript prototype</li></ul></div></div><div class="notice">Current version: responsive front-end prototype with browser-only demo login, dashboard, market-analysis plan and illustrative estimate calculator. It supports manual CSV upload and a rule-based demo estimate, but does not yet have a secure server, MySQL database, automated image recognition, a trained ML model, or automatic email sending.</div></div>
+    </section>
+  </main>
+</section>
+<script>
+let authMode='login';
+function showAuth(mode){
+ authMode=mode; const reg=mode==='register';
+ document.getElementById('loginTab').classList.toggle('active',!reg);
+ document.getElementById('registerTab').classList.toggle('active',reg);
+ document.getElementById('authTitle').textContent=reg?'Create your account':'Welcome back';
+ document.getElementById('authSubtitle').textContent=reg?'Register to open your Drive Data workspace.':'Sign in to continue to your dashboard.';
+ document.getElementById('nameField').classList.toggle('hidden',!reg);
+ document.getElementById('confirmField').classList.toggle('hidden',!reg);
+ document.getElementById('fullName').required=reg;
+ document.getElementById('confirmPassword').required=reg;
+ document.getElementById('authSubmit').textContent=reg?'Create account ↗':'Login to dashboard ↗';
+ document.getElementById('password').autocomplete=reg?'new-password':'current-password';
+ document.getElementById('authMessage').classList.add('hidden');
+}
+function showMessage(msg){const el=document.getElementById('authMessage');el.textContent=msg;el.classList.remove('hidden')}
+function enterApp(name,email){
+ document.getElementById('authScreen').classList.add('hidden');document.getElementById('appScreen').classList.remove('hidden');
+ const display=name||email.split('@')[0];document.getElementById('sideName').textContent=display;document.getElementById('avatar').textContent=display.charAt(0).toUpperCase();
+ document.getElementById('welcomeLine').textContent='Welcome, '+display+'. Here is your Drive Data project at a glance.';
+}
+document.getElementById('authForm').addEventListener('submit',function(e){
+ e.preventDefault();const email=document.getElementById('email').value.trim().toLowerCase(),pass=document.getElementById('password').value;
+ const users=JSON.parse(localStorage.getItem('driveDataDemoUsers')||'{}');
+ if(authMode==='register'){
+  const name=document.getElementById('fullName').value.trim(),confirm=document.getElementById('confirmPassword').value;
+  if(!name){showMessage('Please enter your full name.');return}
+  if(pass.length<6){showMessage('Use at least 6 characters for this demo password.');return}
+  if(pass!==confirm){showMessage('Passwords do not match.');return}
+  if(users[email]){showMessage('An account for this email already exists. Please log in.');return}
+  users[email]={name:name,password:pass};localStorage.setItem('driveDataDemoUsers',JSON.stringify(users));
+  showMessage('Account created in this browser. Opening your dashboard…');setTimeout(()=>enterApp(name,email),450);
+ }else{
+  if(users[email]&&users[email].password===pass){enterApp(users[email].name,email)}
+  else{showMessage('Demo account not found or password incorrect. Choose Create account first, or use the same browser where you registered.')}
+ }
+});
+function navigate(page){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById('page-'+page).classList.add('active');
+ document.querySelectorAll('.nav-btn[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+ const titles={dashboard:'Dashboard overview',search:'Search individual car prices',gallery:'Car image gallery',predict:'Car price estimate',market:'Market insights',prepare:'Data preparation',about:'Project details'};
+ document.getElementById('pageTitle').textContent=titles[page]||'Drive Data';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function logout(){document.getElementById('appScreen').classList.add('hidden');document.getElementById('authScreen').classList.remove('hidden');document.getElementById('authForm').reset();showAuth('login')}
+
+let carCsvRows=[]; let carCsvHeaders=[];
+function parseCsv(text){
+ const rows=[]; let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){
+  const ch=text[i];
+  if(ch==='"' && quoted && text[i+1]==='"'){cell+='"';i++;}
+  else if(ch==='"'){quoted=!quoted;}
+  else if(ch===','&&!quoted){row.push(cell.trim());cell='';}
+  else if((ch==='\n'||ch==='\r')&&!quoted){if(ch==='\r'&&text[i+1]==='\n')i++;row.push(cell.trim());if(row.some(v=>v!==''))rows.push(row);row=[];cell='';}
+  else cell+=ch;
+ }
+ if(cell.length||row.length){row.push(cell.trim());if(row.some(v=>v!==''))rows.push(row)}
+ if(!rows.length)return {headers:[],data:[]};
+ const headers=rows.shift().map(h=>h.replace(/^\uFEFF/, '').trim());
+ return {headers,data:rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,r[i]??''])))};
+}
+function normKey(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+function findColumn(candidates){return carCsvHeaders.find(h=>candidates.includes(normKey(h)))||carCsvHeaders.find(h=>candidates.some(c=>normKey(h).includes(c)))||''}
+document.getElementById('csvUpload').addEventListener('change',function(e){
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ const reader=new FileReader();reader.onload=function(){
+  try{const parsed=parseCsv(String(reader.result||''));carCsvHeaders=parsed.headers;carCsvRows=parsed.data;
+   if(!carCsvRows.length)throw new Error('No data rows found.');
+   const priceCol=findColumn(['price','sellingprice','saleprice','listingprice','resaleprice','msrp','exshowroomprice','currentprice','amount']);
+   const makeCol=findColumn(['make','brand','manufacturer','carbrand']);const modelCol=findColumn(['model','modelname','carmodel']);
+   document.getElementById('csvStatus').textContent='Loaded '+carCsvRows.length.toLocaleString()+' rows and '+carCsvHeaders.length+' columns.'+(priceCol?' Price field detected: '+priceCol+'.':' No obvious price column detected — check the CSV header.');
+   document.getElementById('csvStatus').style.color=priceCol?'#55d6a0':'#ffbd69';
+   document.getElementById('searchResultCaption').textContent='Dataset loaded. Search using any combination of filters.';
+   if(makeCol)document.getElementById('searchMake').placeholder='Filter by '+makeCol;
+   if(modelCol)document.getElementById('searchModel').placeholder='Filter by '+modelCol;
+   searchCars();
+  }catch(err){carCsvRows=[];carCsvHeaders=[];document.getElementById('csvStatus').textContent='Could not read this CSV. Please upload a valid comma-separated CSV file.';}
+ };reader.readAsText(file);
+});
+function searchCars(){
+ const body=document.getElementById('carResultsBody');
+ if(!carCsvRows.length){body.innerHTML='<tr><td colspan="5" class="muted">Please upload car_sales.csv first.</td></tr>';document.getElementById('searchCount').textContent='0 results';return;}
+ const makeCol=findColumn(['make','brand','manufacturer','carbrand']);const modelCol=findColumn(['model','modelname','carmodel']);const yearCol=findColumn(['year','modelyear','manufactureyear','registrationyear']);const fuelCol=findColumn(['fueltype','fuel']);const priceCol=findColumn(['price','sellingprice','saleprice','listingprice','resaleprice','msrp','exshowroomprice','currentprice','amount']);
+ const make=document.getElementById('searchMake').value.trim().toLowerCase(),model=document.getElementById('searchModel').value.trim().toLowerCase(),year=document.getElementById('searchYear').value.trim(),fuel=document.getElementById('searchFuel').value.trim().toLowerCase();
+ const filtered=carCsvRows.filter(r=>(!make||String(r[makeCol]||'').toLowerCase().includes(make))&&(!model||String(r[modelCol]||'').toLowerCase().includes(model))&&(!year||String(r[yearCol]||'').trim()===year)&&(!fuel||String(r[fuelCol]||'').toLowerCase().includes(fuel)));
+ const shown=filtered.slice(0,100);document.getElementById('searchCount').textContent=filtered.length.toLocaleString()+' results';document.getElementById('searchResultCaption').textContent='Showing '+shown.length+' of '+filtered.length.toLocaleString()+' matching records (maximum 100 shown).';
+ const columns=[['Make',makeCol],['Model',modelCol],['Year',yearCol],['Fuel',fuelCol],['Price',priceCol]].filter(([,c])=>c);
+ document.getElementById('carResultsHead').innerHTML=columns.map(([label])=>'<th>'+label+'</th>').join('')||'<th>Record</th>';
+ if(!shown.length){body.innerHTML='<tr><td colspan="'+Math.max(1,columns.length)+'" class="muted">No matching cars. Try a broader search or clear some filters.</td></tr>';return;}
+ body.innerHTML=shown.map(r=>'<tr>'+columns.map(([label,col])=>{let value=r[col]||'—';if(label==='Price'&&value!=='—'){const n=Number(String(value).replace(/[^0-9.-]/g,''));if(Number.isFinite(n)&&n>0)value=n.toLocaleString('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0});}return '<td>'+escapeHtml(String(value))+'</td>'}).join('')+'</tr>').join('');
+}
+
+let preparedCleanRows=[], preparedEncodedRows=[], preparedCleanHeaders=[], preparedEncodedHeaders=[];
+function prepNorm(s){return String(s??'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+function prepareDataset(){
+ const input=document.getElementById('prepCsv'),file=input.files&&input.files[0];
+ if(!file){document.getElementById('prepStatus').textContent='Please choose a CSV file first.';return;}
+ const reader=new FileReader();
+ reader.onload=function(){
+  try{
+   const parsed=parseCsv(String(reader.result||''));
+   if(!parsed.headers.length||!parsed.data.length)throw new Error('The CSV appears to be empty or has no data rows.');
+   const originalHeaders=parsed.headers;
+   const normalized=originalHeaders.map(h=>prepNorm(h)||'column');
+   const seen={};
+   const headers=normalized.map(h=>{seen[h]=(seen[h]||0)+1;return seen[h]>1?h+'_'+seen[h]:h;});
+   let rows=parsed.data.map(source=>{const o={};originalHeaders.forEach((h,i)=>o[headers[i]]=String(source[h]??'').trim());return o;});
+   const beforeBlank=rows.length;
+   rows=rows.filter(r=>Object.values(r).some(v=>v!==''));
+   const blankRemoved=beforeBlank-rows.length;
+   const signatures=new Set(),unique=[];
+   rows.forEach(r=>{const sig=headers.map(h=>r[h]??'').join('\\u001f');if(!signatures.has(sig)){signatures.add(sig);unique.push(r);}});
+   const duplicateRemoved=rows.length-unique.length;rows=unique;
+   const yearCol=headers.find(h=>['year','modelyear','manufactureyear','manufacturingyear','vehicleyear'].includes(prepNorm(h)))||headers.find(h=>prepNorm(h).includes('year'));
+   if(yearCol){
+    const currentYear=new Date().getFullYear();
+    rows=rows.map(r=>{const y=Number(r[yearCol]);const age=r[yearCol]!==''&&Number.isFinite(y)&&y>=1886&&y<=currentYear?currentYear-y:'';return {...r,car_age:age};});
+   }
+   preparedCleanHeaders=[...headers];
+   if(yearCol&&!preparedCleanHeaders.includes('car_age'))preparedCleanHeaders.push('car_age');
+   preparedCleanRows=rows.map(r=>{const o={};preparedCleanHeaders.forEach(h=>o[h]=r[h]??'');return o;});
+   const categoryCols=preparedCleanHeaders.filter(h=>{
+    if(h==='car_age')return false;
+    const vals=preparedCleanRows.map(r=>String(r[h]??'').trim()).filter(v=>v!=='');
+    return vals.length>0&&vals.some(v=>!Number.isFinite(Number(v)));
+   });
+   const categoryValues={};
+   categoryCols.forEach(col=>categoryValues[col]=[...new Set(preparedCleanRows.map(r=>String(r[col]??'').trim()).filter(v=>v!==''))].sort((a,b)=>a.localeCompare(b)));
+   preparedEncodedHeaders=preparedCleanHeaders.filter(h=>!categoryCols.includes(h));
+   categoryCols.forEach(col=>categoryValues[col].forEach(v=>preparedEncodedHeaders.push(col+'_'+v)));
+   preparedEncodedRows=preparedCleanRows.map(r=>{
+    const o={};
+    preparedCleanHeaders.filter(h=>!categoryCols.includes(h)).forEach(h=>o[h]=r[h]??'');
+    categoryCols.forEach(col=>categoryValues[col].forEach(v=>o[col+'_'+v]=String(r[col]??'').trim()===v?1:0));
+    return o;
+   });
+   document.getElementById('prepRows').textContent=preparedCleanRows.length.toLocaleString();
+   document.getElementById('prepDuplicates').textContent=duplicateRemoved.toLocaleString();
+   document.getElementById('prepBlank').textContent=blankRemoved.toLocaleString();
+   document.getElementById('prepCategories').textContent=categoryCols.length.toLocaleString();
+   const missing=[];
+   preparedCleanHeaders.forEach(h=>{const n=preparedCleanRows.filter(r=>String(r[h]??'').trim()==='').length;if(n)missing.push(h+': '+n);});
+   document.getElementById('prepMissing').textContent=missing.length?'Missing values by column — '+missing.join(' · '):'No missing values found in the prepared columns.';
+   document.getElementById('prepSummary').textContent='Loaded '+parsed.data.length+' source records. Kept '+preparedCleanRows.length+' records after cleaning. '+(yearCol?'Created car_age from “'+yearCol+'” using '+new Date().getFullYear()+' as the current year.':'No year/model_year column detected; car_age was not created.')+' Encoded '+categoryCols.length+' categorical columns using one-hot encoding.';
+   document.getElementById('prepStatus').textContent='Preparation complete for '+file.name+'. Preview the data or download either CSV output.';
+   document.getElementById('downloadCleanBtn').disabled=false;document.getElementById('downloadEncodedBtn').disabled=false;
+   renderPrepPreview();
+  }catch(err){document.getElementById('prepStatus').textContent='Could not prepare this file: '+err.message;}
+ };
+ reader.onerror=()=>document.getElementById('prepStatus').textContent='The file could not be read. Please try another CSV.';
+ reader.readAsText(file);
+}
+function renderPrepPreview(){
+ const head=document.getElementById('prepPreviewHead'),body=document.getElementById('prepPreviewBody');
+ head.innerHTML='<tr>'+preparedCleanHeaders.map(h=>'<th>'+escapeHtml(h)+'</th>').join('')+'</tr>';
+ if(!preparedCleanRows.length){body.innerHTML='<tr><td colspan="'+preparedCleanHeaders.length+'">No records remain after cleaning.</td></tr>';return;}
+ body.innerHTML=preparedCleanRows.slice(0,10).map(r=>'<tr>'+preparedCleanHeaders.map(h=>'<td>'+escapeHtml(String(r[h]??''))+'</td>').join('')+'</tr>').join('');
+}
+function csvEscape(v){const s=String(v??'');return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+function downloadPrepared(kind){
+ const rows=kind==='encoded'?preparedEncodedRows:preparedCleanRows,headers=kind==='encoded'?preparedEncodedHeaders:preparedCleanHeaders;
+ if(!rows.length||!headers.length){alert('Prepare a CSV dataset first.');return;}
+ const content=[headers.map(csvEscape).join(','),...rows.map(r=>headers.map(h=>csvEscape(r[h])).join(','))].join('\r\n');
+ const blob=new Blob(['\uFEFF',content],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download=kind==='encoded'?'car_sales_encoded.csv':'car_sales_cleaned.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+
+function escapeHtml(v){return v.replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function clearCarSearch(){['searchMake','searchModel','searchYear'].forEach(id=>document.getElementById(id).value='');document.getElementById('searchFuel').value='';searchCars();}
+
+let latestEstimate = null;
+let uploadedCarPhotoData = '';
+document.getElementById('carPhotoUpload').addEventListener('change', function(e){
+ const file=e.target.files && e.target.files[0];
+ const preview=document.getElementById('carPhotoPreview');
+ uploadedCarPhotoData='';
+ if(!file){preview.style.display='none';preview.removeAttribute('src');return;}
+ if(!file.type.startsWith('image/')){alert('Please choose an image file such as JPG or PNG.');e.target.value='';preview.style.display='none';return;}
+ const reader=new FileReader();reader.onload=function(){uploadedCarPhotoData=String(reader.result||'');preview.src=uploadedCarPhotoData;preview.style.display='block';};reader.readAsDataURL(file);
+});
+
+document.getElementById('predictionForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ const year=Number(document.getElementById('year').value),mileage=Number(document.getElementById('mileage').value),original=Number(document.getElementById('original').value),owners=Number(document.getElementById('owners').value);
+ const now=new Date().getFullYear(),age=Math.max(0,now-year);
+ if(year<1990||year>now||mileage<0||original<=0){alert('Please enter valid vehicle details.');return;}
+ let retention=Math.max(.12,Math.min(.88,Math.pow(.84,age)*Math.max(.55,1-mileage/350000)*Math.max(.68,1-(owners-1)*.09)));
+ const make=document.getElementById('make').value,model=document.getElementById('model').value.trim(),fuel=document.getElementById('fuel').value,transmission=document.getElementById('transmission').value;
+ if(make==='BMW'||make==='Mercedes')retention*=1.05;
+ const estimate=Math.round(original*retention/1000)*1000;
+ const email=document.getElementById('customerEmail').value.trim();
+ latestEstimate={make,model,year,mileage,original,owners,age,fuel,transmission,estimate,email,photo:uploadedCarPhotoData};
+ document.getElementById('estimateCar').textContent=make+' '+model;
+ document.getElementById('estimatePrice').textContent=estimate.toLocaleString('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0});
+ document.getElementById('estimateAge').textContent=age+' year'+(age===1?'':'s');
+ document.getElementById('estimateMileage').textContent=mileage.toLocaleString('en-IN')+' km';
+ document.getElementById('emailEstimateBtn').disabled=false;
+ document.getElementById('emailStatus').textContent='Estimate ready for '+email+'. Tap Email estimate to customer to open a pre-filled email draft.';
+});
+function emailEstimateToCustomer(){
+ if(!latestEstimate){alert('Calculate an estimate first.');return;}
+ const d=latestEstimate;
+ const subject=encodeURIComponent('Drive Data car price estimate — '+d.make+' '+d.model);
+ const body=encodeURIComponent('Hello,\n\nHere is your Drive Data estimated resale value report.\n\nVehicle: '+d.make+' '+d.model+'\nYear: '+d.year+'\nFuel: '+d.fuel+'\nTransmission: '+d.transmission+'\nOdometer: '+d.mileage.toLocaleString('en-IN')+' km\nPrevious owners: '+d.owners+'\nOriginal price entered: '+d.original.toLocaleString('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0})+'\nEstimated resale value: '+d.estimate.toLocaleString('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0})+'\n\nImportant: This is an illustrative rule-based estimate, not a verified market quote or trained ML prediction. Please verify against current local listings and vehicle condition.\n\nRegards,\nDrive Data');
+ window.location.href='mailto:'+encodeURIComponent(d.email)+'?subject='+subject+'&body='+body;
+ document.getElementById('emailStatus').textContent='Your email app should open with the estimate draft. Review it and press Send in that app.';
+}
+function downloadEstimateReport(){
+ if(!latestEstimate){alert('Calculate an estimate first.');return;}
+ const d=latestEstimate;
+ const report='DRIVE DATA — CAR PRICE ESTIMATE REPORT\n\nVehicle: '+d.make+' '+d.model+'\nYear: '+d.year+'\nFuel: '+d.fuel+'\nTransmission: '+d.transmission+'\nMileage: '+d.mileage+' km\nPrevious owners: '+d.owners+'\nOriginal price entered: INR '+d.original+'\nEstimated resale value: INR '+d.estimate+'\nCustomer email: '+d.email+'\n\nNOTE: Illustrative rule-based estimate only. Not a trained ML prediction or verified market quote.';
+ const blob=new Blob([report],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='drive-data-estimate.txt';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
